@@ -1,9 +1,9 @@
-import {FlatList, StyleSheet,  View} from 'react-native'
+import {FlatList, StyleSheet, View} from 'react-native'
 import React from 'react'
 import GameItem from "./GameItem";
 
 const GamesList = ({items}) => {
-    const renderGameItem = ({itemData}) => {
+    const renderGameItem = (itemData) => {
         const item = itemData.item
 
         const gameProps = {
@@ -17,7 +17,7 @@ const GamesList = ({items}) => {
         return <GameItem {...gameProps}/>
     }
     return (
-        <View>
+        <View style={styles.container}>
             <FlatList data={items} keyExtractor={(item) => item.id} renderItem={renderGameItem}/>
         </View>
     )
@@ -25,4 +25,9 @@ const GamesList = ({items}) => {
 
 export default GamesList
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        padding: 16
+    }
+})
