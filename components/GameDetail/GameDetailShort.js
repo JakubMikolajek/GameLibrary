@@ -4,8 +4,8 @@ import React from 'react'
 const GameDetailShort = ({developers, publisher, description}) => {
     return (
         <View style={styles.details}>
-            <Text style={styles.detailItem}>Developer: {developers}</Text>
-            <Text style={styles.detailItem}>Publisher: {publisher}</Text>
+            <Text style={styles.detailItem}>Deweloper: {developers}</Text>
+            <Text style={styles.detailItem}>Wydawca: {publisher}</Text>
         </View>
     )
 }

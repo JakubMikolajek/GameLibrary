@@ -5,8 +5,8 @@ const GameDetailLong = ({developers, publisher, description}) => {
     return (
         <View style={styles.details}>
             <View style={styles.devInfo}>
-                <Text style={styles.devItem}>Developer: {developers}</Text>
-                <Text style={styles.devItem}>Publisher: {publisher}</Text>
+                <Text style={styles.devItem}>Deweloper: {developers}</Text>
+                <Text style={styles.devItem}>Wydawca: {publisher}</Text>
             </View>
             <Text style={styles.detailItem}>{description}</Text>
         </View>
