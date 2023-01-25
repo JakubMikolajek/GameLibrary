@@ -1,11 +1,12 @@
 import {Alert, Button, StyleSheet, Text, TextInput, View} from 'react-native'
 import React from 'react'
+import {useNavigation} from "@react-navigation/native";
 
-const Register = ({onPress}) => {
-
+const Register = () => {
+    const navigation = useNavigation()
     const registerHandler = () => {
         return (
-            Alert.alert("Zarejestrowano pomyślnie", "Po zamknięciu okna zostaniesz przekierowny na twój profil.")
+            Alert.alert("Zarejestrowano pomyślnie", "Teraz możesz się zalogować i zacząć korzystać ze wszystkich możliwości aplikacji")
         )
     }
 
@@ -23,7 +24,7 @@ const Register = ({onPress}) => {
             </View>
             <View>
                 <Text>Masz już konto?</Text>
-                <Button title="Zaloguj się" onPress={onPress}/>
+                <Button title="Zaloguj się" onPress={() =>navigation.navigate("Login") }/>
             </View>
         </View>
     )

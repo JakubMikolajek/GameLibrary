@@ -1,14 +1,14 @@
-import {Alert, Button, StyleSheet, Text, TextInput, View} from 'react-native'
+import {Button, StyleSheet, Text, TextInput, View} from 'react-native'
 import React from 'react'
+import {useNavigation} from "@react-navigation/native";
+import {useDispatch} from "react-redux";
+import {loginStatus} from "../../store/account";
 
-const Login = ({onPress, login}) => {
-
+const Login = () => {
+    const navigation = useNavigation()
+    const dispatch = useDispatch()
     const loginHandler = () => {
-        login()
-        return (
-            Alert.alert("Zalogowano pomyślnie", "Zostałeś przekierowny na twój profil.")
-
-        )
+        dispatch(loginStatus())
     }
 
     return (
@@ -23,7 +23,7 @@ const Login = ({onPress, login}) => {
             </View>
             <View>
                 <Text>Jeśli nie masz konta</Text>
-                <Button title="Zarejestruj się" onPress={onPress}/>
+                <Button title="Zarejestruj się" onPress={() => navigation.navigate("Register")}/>
             </View>
         </View>
     )

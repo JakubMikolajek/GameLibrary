@@ -18,7 +18,7 @@ const GamesList = ({items}) => {
     }
     return (
         <View style={styles.container}>
-            <FlatList data={items} keyExtractor={(item) => item.id} renderItem={renderGameItem}/>
+            <FlatList data={items} keyExtractor={(item) => item.id} renderItem={renderGameItem} showsVerticalScrollIndicator={false}/>
         </View>
     )
 }

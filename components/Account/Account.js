@@ -1,10 +1,12 @@
-import {Alert, Button, StyleSheet, Text, View} from 'react-native'
+import {Button, Text, View} from 'react-native'
 import React from 'react'
+import {useDispatch} from "react-redux";
+import {logoutStatus} from "../../store/account";
 
-const Account = ({logout}) => {
+const Account = () => {
+    const dispatch = useDispatch()
     const logoutHandler = () => {
-        Alert.alert("Wylogowano pomyślnie", "Zostałeś przekierowany do okna logowania.")
-        logout()
+        dispatch(logoutStatus())
     }
 
   return (
@@ -16,5 +18,3 @@ const Account = ({logout}) => {
 }
 
 export default Account
-
-const styles = StyleSheet.create({})

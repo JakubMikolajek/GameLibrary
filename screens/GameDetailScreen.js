@@ -1,18 +1,26 @@
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native'
+import {Image, ScrollView, StyleSheet, Text} from 'react-native'
 import React, {useLayoutEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
-import {GAMES} from "../data/game-data";
 import {addFavorite, removeFavorite} from "../store/favorite";
 import Icon from "../components/UI/Icon";
 import GameDetailLong from "../components/GameDetail/GameDetailLong";
+import {useQuery} from "@tanstack/react-query";
+import {getAllGames} from "../supabase/supabaseHelpers";
 
 
 const GameDetailScreen = ({route, navigation}) => {
     const favoriteGamesIds = useSelector((state) => state.favoriteGames.ids)
+    const profileStatus = useSelector((state) => state.account.status)
     const dispatch = useDispatch()
 
+    const {
+        data: allGamesData,
+    } = useQuery(['games'], () => getAllGames(), {enabled: false})
+
+    const games = allGamesData.data
+
     const gameId = route.params.gameId
-    const selectedGame = GAMES.find((game) => game.id === gameId)
+    const selectedGame = games.find((game) => game.id === gameId)
     const gameIsFav = favoriteGamesIds.includes(gameId)
 
     const favoriteChangeHandler = () => {
@@ -24,13 +32,16 @@ const GameDetailScreen = ({route, navigation}) => {
     }
 
     useLayoutEffect(() => {
-        navigation.setOptions({
-            headerRight: () => {
-                return (
-                    <Icon icon={gameIsFav ? "heart" : "heart-outline"} color="black" onPress={favoriteChangeHandler}/>
-                )
-            }
-        })
+        if (profileStatus === true) {
+            navigation.setOptions({
+                headerRight: () => {
+                    return (
+                        <Icon icon={gameIsFav ? "heart" : "heart-outline"} color="black"
+                              onPress={favoriteChangeHandler}/>
+                    )
+                }
+            })
+        }
     }, [navigation, favoriteChangeHandler])
 
     return (
