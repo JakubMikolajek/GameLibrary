@@ -1,16 +1,18 @@
 import {Image, ScrollView, StyleSheet, Text} from 'react-native'
-import React, {useLayoutEffect} from 'react'
+import React, {useContext, useLayoutEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 import {addFavorite, removeFavorite} from "../store/favorite";
 import Icon from "../components/UI/Icon";
 import GameDetailLong from "../components/GameDetail/GameDetailLong";
 import {useQuery} from "@tanstack/react-query";
 import {getAllGames} from "../supabase/supabaseHelpers";
+import {AuthContext} from "../store/auth-context";
 
 
 const GameDetailScreen = ({route, navigation}) => {
+    const authCtx = useContext(AuthContext)
     const favoriteGamesIds = useSelector((state) => state.favoriteGames.ids)
-    const profileStatus = useSelector((state) => state.account.status)
+    const profileStatus = authCtx.isAuth
     const dispatch = useDispatch()
 
     const {

@@ -1,12 +1,11 @@
 import {Button, Text, View} from 'react-native'
-import React from 'react'
-import {useDispatch} from "react-redux";
-import {logoutStatus} from "../../store/account";
+import React, {useContext} from 'react'
+import {AuthContext} from "../../store/auth-context";
 
 const Account = () => {
-    const dispatch = useDispatch()
+    const authCtx = useContext(AuthContext)
     const logoutHandler = () => {
-        dispatch(logoutStatus())
+        authCtx.logoutFn()
     }
 
   return (

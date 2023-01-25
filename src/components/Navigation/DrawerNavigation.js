@@ -1,16 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Ionicons} from "@expo/vector-icons";
 import CategoryScreen from "../../screens/CategoryScreen";
 import CartScreen from "../../screens/CartScreen";
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import TabMenu from "./BottomTabNavigation";
-import {useSelector} from "react-redux";
 import RegisterMenu from "./StackNavigation";
+import {AuthContext} from "../../store/auth-context";
 
 const Drawer = createDrawerNavigator();
 
 const DrawerNavigation = () => {
-    const profileStatus = useSelector((state) => state.account.status)
+    const authCtx = useContext(AuthContext)
+    const isAuth = authCtx.isAuth
 
     return (
         <Drawer.Navigator>
@@ -24,7 +25,7 @@ const DrawerNavigation = () => {
                 drawerIcon: ({color, size}) => (<Ionicons name="cart-outline" color={color} size={size}/>)
             }}/>
             <Drawer.Screen
-                name="TabMenu" component={!profileStatus ? RegisterMenu : TabMenu} options={{
+                name="TabMenu" component={!isAuth ? RegisterMenu : TabMenu} options={{
                 title: "Twój profil",
                 drawerIcon: ({color, size}) => (<Ionicons name="person-outline" color={color} size={size}/>)
             }}/>
